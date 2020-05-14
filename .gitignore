@@ -1,0 +1,22 @@
+
+# Node.js
+node_modules
+
+# macOS
+.DS_Store
+
+# IntelliJ
+.idea
+*.iml
+
+# Distribution path IS committed
+# /dist/js/
+
+# TypeScript build path
+bin
+
+# TypeDoc output
+doc
+
+# Jest coverage output
+coverage
