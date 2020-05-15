@@ -61,7 +61,7 @@
         (
             scene         :bz.Scene,
             canvas        :bz.CanvasSystem,
-            ambientColor  :BABYLON.Color3 = bz.SettingColor.COLOR_RGB_WHITE,
+            ambientColor  :BABYLON.Color3 = new BABYLON.Color3( 0.0, 0.0, 0.0 ),
             clearColor    :BABYLON.Color4 = bz.SettingColor.COLOR_RGBA_WHITE_OPAQUE,
             initialCamera :bz.CameraType  = bz.CameraType.ARC_ROTATE
         )
@@ -115,6 +115,9 @@
             // create pointer system
             this.pointerSystem = new bz.PointerSystem();
             this.pointerSystem.addDragSupport();
+
+            // add lights
+            this.addLights();
         }
 
         /** ************************************************************************************************************
@@ -381,7 +384,7 @@
                         bz.MeshFactory.createBox
                         (
                             this.scene,
-                            this.ambientColor,
+                            new BABYLON.Color3( 1.0, 1.0, 1.0 ),
                             bz.Texture.WALL_GLASS,
                             new BABYLON.Vector3(
                                 -( bz.SettingGame.LEVEL_SIZE_X / 2 ),
@@ -394,8 +397,8 @@
                                 bz.SettingGame.LEVEL_SIZE_Z
                             ),
                             null,
-                            null,
-                            0.4
+                            new BABYLON.Color3( 1.0, 1.0, 1.0 ),
+                            0.5
                         ),
                     ]
                 )
@@ -544,9 +547,9 @@
                                 bz.SettingGame.RING_THICKNESS,
                                 null,
                                 null, // bz.Texture.WALL_TEST,
-                                null, // new BABYLON.Color3( 0.5, 0.5, 0.5 ),
+                                ringColor, // new BABYLON.Color3( 0.5, 0.5, 0.5 ),
                                 1.0,
-                                ringColor // this.ambientColor
+                                new BABYLON.Color3( 0.0, 0.0, 0.0 ) // this.ambientColor
                             ),
                         ]
                     )
@@ -716,5 +719,30 @@
 
                 this.gameSolved = true;
             }
+        }
+
+        private addLights() : void
+        {
+            const pointLight1 :BABYLON.PointLight = bz.LightFactory.createPoint(
+                this.scene.getNativeScene(),
+                new BABYLON.Vector3( 0.0, 5.0, ( bz.SettingGame.LEVEL_SIZE_Z / 2 ) ),
+                new BABYLON.Color3( 1.0, 1.0, 1.0 ),
+                new BABYLON.Color3( 1.0, 1.0, 1.0 ),
+                25.0,
+                1.5,
+                true
+            );
+            const pointLight2 :BABYLON.PointLight = bz.LightFactory.createPoint(
+                this.scene.getNativeScene(),
+                new BABYLON.Vector3( 0.0, 5.0, -( bz.SettingGame.LEVEL_SIZE_Z / 2 ) ),
+                new BABYLON.Color3( 1.0, 1.0, 1.0 ),
+                new BABYLON.Color3( 1.0, 1.0, 1.0 ),
+                25.0,
+                1.5,
+                true
+            );
+
+            this.scene.getNativeScene().addLight( pointLight1 );
+            this.scene.getNativeScene().addLight( pointLight2 );
         }
     }

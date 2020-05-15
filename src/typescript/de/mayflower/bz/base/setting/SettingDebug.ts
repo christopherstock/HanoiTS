@@ -26,7 +26,7 @@
         public  static  readonly    SHOW_BJS_DEBUG_LAYER                    :boolean            = ( false && SettingDebug.DEBUG_MODE );
 
         /** Show the world coordinate axis. */
-        public  static  readonly    DEBUG_COORDINATE_AXIS_ENABLED           :boolean            = ( false && SettingDebug.DEBUG_MODE );
+        public  static  readonly    DEBUG_COORDINATE_AXIS_ENABLED           :boolean            = ( true && SettingDebug.DEBUG_MODE );
         /** The length of the world coordinate axis. */
         public  static  readonly    DEBUG_COORDINATE_AXIS_LENGTH            :number             = 25.0;
     }
