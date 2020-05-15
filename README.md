@@ -21,16 +21,6 @@ Launch the compiled version here:
 
 https://christopherstock.github.io/HanoiTS/dist/
 
-Use the following keys:
-
-| Key   | Function           |
-| ------|:------------------:|
-| UP    | Move Up            |
-| DOWN  | Move Down          |
-| LEFT  | Move Left          |
-| RIGHT | Move Right         |
-| ENTER | Toggle camera zoom |
-
 ## Installation
 
 Git clone the project repository and launch the following command in the local project directory:
@@ -43,9 +33,9 @@ Run the **Webpack Dev Server** for building and executing the Application:
 
 `npm run webpack:devserver`
 
-The application can now be seen in the browser using the following address:
+The application can now be seen in the browser:
  
-`http://localhost:1236/`
+`http://localhost:1234/`
 
 All project code changes result in an immediate rebuild of the project by the Webpack Dev Server.
  The app is automatically reloaded in the browser after the build process has been finished.
