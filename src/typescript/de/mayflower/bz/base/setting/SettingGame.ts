@@ -17,13 +17,12 @@
 
         /** Pole diameter. */
         public  static  readonly    POLE_DIAMETER                       :number             = 0.5;
-        /** Pole size Y. */
-        public  static  readonly    POLE_SIZE_Y                         :number             = 4.0;
 
         /** Ring thickness. */
         public  static  readonly    RING_THICKNESS                      :number             = 0.5;
         /** Number of Rings. */
-        public  static  readonly    RING_COUNT                          :number             = 6;
+        public  static  readonly    RING_COUNT                          :number             = 3;
+
         /** Ring Size of the smallest Ring. */
         public  static  readonly    RING_SIZE_SMALLEST_RING             :number             = 1.0;
         /** Ring Difference between one ring size. */

@@ -1,5 +1,6 @@
 
     import * as bz from '../../..';
+    import { Stage } from '../../..';
 
     /** ****************************************************************************************************************
     *   The pointer system that manages all pointer interactions.
@@ -136,8 +137,13 @@
 
                 bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
 
-                this.currentMesh.position.y = bz.SettingGame.POLE_SIZE_Y + 0.1;
+                this.currentMesh.position.y = this.getRingOffset();
             }
+        }
+
+        private getRingOffset(): number
+        {
+            return Stage.getPoleHeight() + bz.SettingGame.RING_THICKNESS / 2 + 0.1;
         }
 
         private onPointerUp( evt:PointerEvent ) : void
@@ -175,7 +181,7 @@
             this.currentMesh.position.addInPlace( diff );
 
             // clip current Mesh to bounds! TODO extract to Stage
-            this.currentMesh.position.y = bz.SettingGame.POLE_SIZE_Y + 0.1;
+            this.currentMesh.position.y = this.getRingOffset();
             this.currentMesh.position.z = 0;
 
             if ( this.currentMesh.position.x < -bz.SettingGame.LEVEL_SIZE_X / 4 )

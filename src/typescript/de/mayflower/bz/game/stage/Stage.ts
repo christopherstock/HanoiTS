@@ -434,7 +434,7 @@
                                     -( bz.SettingGame.POLE_DIAMETER / 2 )
                                 ),
                                 bz.SettingGame.POLE_DIAMETER,
-                                bz.SettingGame.POLE_SIZE_Y,
+                                Stage.getPoleHeight(),
                                 null,
                                 bz.Texture.WALL_WOOD,
                                 null,
@@ -463,7 +463,7 @@
                                     -( bz.SettingGame.POLE_DIAMETER / 2 )
                                 ),
                                 bz.SettingGame.POLE_DIAMETER,
-                                bz.SettingGame.POLE_SIZE_Y,
+                                Stage.getPoleHeight(),
                                 null,
                                 bz.Texture.WALL_WOOD,
                                 null,
@@ -492,7 +492,7 @@
                                     -( bz.SettingGame.POLE_DIAMETER / 2 )
                                 ),
                                 bz.SettingGame.POLE_DIAMETER,
-                                bz.SettingGame.POLE_SIZE_Y,
+                                Stage.getPoleHeight(),
                                 null,
                                 bz.Texture.WALL_WOOD,
                                 null,
@@ -505,6 +505,15 @@
             );
 
             return poles;
+        }
+
+        /**
+         * Calculates the pole height from the nr of rings
+         */
+        public static getPoleHeight(): number
+        {
+            return bz.SettingGame.RING_DISTANCE_Y_GROUND
+                + ( ( bz.SettingGame.RING_THICKNESS + bz.SettingGame.RING_DISTANCE_Y ) * bz.SettingGame.RING_COUNT );
         }
 
         /** ************************************************************************************************************
