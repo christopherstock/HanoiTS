@@ -44,7 +44,7 @@
         /** The pointer system. */
         private                             pointerSystem           :bz.PointerSystem                       = null;
 
-        private                             gameSolved              :boolean                                = false;
+        public                              gameSolved              :boolean                                = false;
 
         /** ************************************************************************************************************
         *   Creates a new custom stage.

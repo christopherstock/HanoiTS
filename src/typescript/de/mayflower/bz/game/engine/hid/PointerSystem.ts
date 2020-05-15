@@ -122,7 +122,11 @@
                 // check if we are even allowed to grab this ring
                 const pole : bz.Pole = bz.Main.game.stage.getPoleForRing(grabbedRing)
 
-                if (pole.rings[pole.rings.length-1] !== grabbedRing) {
+                // grab ring if it is the upper ring in this pole and if the game is not solved yet
+                if (
+                    pole.rings[pole.rings.length-1] !== grabbedRing
+                    || bz.Main.game.stage.gameSolved
+                ) {
                     return;
                 }
 
