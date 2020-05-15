@@ -21,7 +21,7 @@
         /** Ring thickness. */
         public  static  readonly    RING_THICKNESS                      :number             = 0.5;
         /** Number of Rings. */
-        public  static  readonly    RING_COUNT                          :number             = 3;
+        public  static  readonly    RING_COUNT                          :number             = 6;
 
         /** Ring Size of the smallest Ring. */
         public  static  readonly    RING_SIZE_SMALLEST_RING             :number             = 1.0;

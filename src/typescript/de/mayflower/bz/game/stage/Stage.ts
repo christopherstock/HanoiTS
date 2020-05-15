@@ -738,7 +738,7 @@
                 new BABYLON.Color3( 1.0, 1.0, 1.0 ),
                 new BABYLON.Color3( 1.0, 1.0, 1.0 ),
                 25.0,
-                1.5,
+                1.25,
                 true
             );
             const pointLight2 :BABYLON.PointLight = bz.LightFactory.createPoint(
@@ -747,7 +747,7 @@
                 new BABYLON.Color3( 1.0, 1.0, 1.0 ),
                 new BABYLON.Color3( 1.0, 1.0, 1.0 ),
                 25.0,
-                1.5,
+                1.25,
                 true
             );
 
