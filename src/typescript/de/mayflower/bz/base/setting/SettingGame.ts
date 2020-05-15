@@ -9,7 +9,7 @@
     export class SettingGame
     {
         /** Ground size X. */
-        public  static  readonly    LEVEL_SIZE_X                        :number             = 15.0;
+        public  static  readonly    LEVEL_SIZE_X                        :number             = 18.0;
         /** Ground size Y. */
         public  static  readonly    LEVEL_SIZE_Y                        :number             = 0.25;
         /** Ground size Z. */

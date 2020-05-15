@@ -143,9 +143,6 @@
             // consider pause
             if ( !this.pause )
             {
-                // handle level specific keys
-                Stage.handleLevelKeys();
-
                 // render walls
                 for ( const wall of this.walls )
                 {
@@ -252,23 +249,35 @@
         *
         *   @return The camera system for this stage.
         ***************************************************************************************************************/
-        public dropRingOnNewPosition( currentRing:bz.Ring ) : void
+        public dropRingOnNewPosition( ring:bz.Ring ) : void
         {
             // check if the ring is over a pole
+            let ringIsOverPole :boolean = false;
             for ( const pole of this.poles )
             {
                 if (
-                    currentRing.getModel().getMesh( 0 ).position.x + ( currentRing.diameter / 2 )
+                    ring.getModel().getMesh( 0 ).position.x + ( ring.diameter / 2 )
                     > pole.getModel().getMesh( 0 ).position.x - bz.SettingGame.POLE_DIAMETER
                     &&
-                    currentRing.getModel().getMesh( 0 ).position.x - ( currentRing.diameter / 2 )
+                    ring.getModel().getMesh( 0 ).position.x - ( ring.diameter / 2 )
                     < pole.getModel().getMesh( 0 ).position.x + bz.SettingGame.POLE_DIAMETER
                 ) {
-                    currentRing.getModel().getMesh( 0 ).position.x = (
+                    ringIsOverPole = true;
+                    ring.getModel().getMesh( 0 ).position.x = (
                         pole.getModel().getMesh( 0 ).position.x
                         + ( bz.SettingGame.POLE_DIAMETER / 2 )
                     );
                 }
+            }
+
+            // snap back the ring to the currently assigned pole if not over new pole
+            if ( !ringIsOverPole )
+            {
+                const assignedPole :bz.Pole = this.getPoleForRing( ring );
+                ring.getModel().getMesh( 0 ).position.x = (
+                    assignedPole.getModel().getMesh( 0 ).position.x
+                    + ( bz.SettingGame.POLE_DIAMETER / 2 )
+                );
             }
         }
 
@@ -586,7 +595,7 @@
         /** ************************************************************************************************************
         *   Handles level specific keys.
         ***************************************************************************************************************/
-        private static handleLevelKeys() : void
+        private handleLevelKeys() : void
         {
             // const keySystem :bz.KeySystem = bz.Main.game.getKeySystem();
 /*
@@ -595,5 +604,24 @@
                 keySystem.setNeedsRelease( bz.KeyCodes.KEY_ENTER );
             }
 */
+        }
+
+        /** ************************************************************************************************************
+        *   Handles level specific keys.
+        ***************************************************************************************************************/
+        private getPoleForRing( ringToCheck:bz.Ring ) : bz.Pole
+        {
+            for ( const pole of this.poles )
+            {
+                for ( const ring of pole.rings )
+                {
+                    if ( ringToCheck === ring )
+                    {
+                        return pole;
+                    }
+                }
+            }
+
+            return null;
         }
     }
