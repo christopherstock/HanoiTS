@@ -48,6 +48,7 @@
     export * from './game/object/SoilType';
     export * from './game/object/Wall';
     export * from './game/object/Ring';
+    export * from './game/object/Pole';
 
     export * from './data/ModelFile';
     export * from './data/Texture';

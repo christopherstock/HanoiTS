@@ -305,7 +305,7 @@
 
             // pole A
             walls.push(
-                new bz.Wall
+                new bz.Pole
                 (
                     this,
                     new bz.Model
@@ -334,7 +334,7 @@
 
             // pole B
             walls.push(
-                new bz.Wall
+                new bz.Pole
                 (
                     this,
                     new bz.Model
@@ -363,7 +363,7 @@
 
             // pole C
             walls.push(
-                new bz.Wall
+                new bz.Pole
                 (
                     this,
                     new bz.Model
