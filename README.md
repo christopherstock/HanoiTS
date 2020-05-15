@@ -2,7 +2,7 @@
 
 The Towers of Hanoi - Realised with TypeScript and the [babylon.js](https://www.babylonjs.com/) 3D engine.
 
-![babylon.js](https://github.com/christopherstock/HanoiTS/raw/master/_ASSET/readme/logo_babylon-js.png)
+![HanoiTS](https://github.com/christopherstock/HanoiTS/raw/master/dist/res/image/promo/promo.png)
 
 ## Tech Stack
 - babylon.js 4.0.3
@@ -13,9 +13,11 @@ The Towers of Hanoi - Realised with TypeScript and the [babylon.js](https://www.
 - ESLint 6.8
 - TSLint 5.16
 
+![babylon.js](https://github.com/christopherstock/HanoiTS/raw/master/_ASSET/readme/logo_babylon-js.png)
+
 <hr>
 
-## View Online!
+## Play it Online!
 
 Launch the compiled version here:
 
