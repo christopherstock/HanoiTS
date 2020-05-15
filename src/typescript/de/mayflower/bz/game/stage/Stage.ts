@@ -262,18 +262,23 @@
                     ring.getModel().getMesh( 0 ).position.x - ( ring.diameter / 2 )
                     < pole.getModel().getMesh( 0 ).position.x + bz.SettingGame.POLE_DIAMETER
                 ) {
-                    ringIsOverPole = true;
 
-                    // set new position for ring
-                    ring.getModel().getMesh( 0 ).position.x = (
-                        pole.getModel().getMesh( 0 ).position.x
-                        + ( bz.SettingGame.POLE_DIAMETER / 2 )
-                    );
+                    // check if ring may be assigned to this pole
+                    if ( this.ringIsAssignableToPole( ring, pole ) )
+                    {
+                        ringIsOverPole = true;
 
-                    // set ring to new pole
-                    this.setNewPoleForRing( ring, pole );
+                        // set new position for ring
+                        ring.getModel().getMesh( 0 ).position.x = (
+                            pole.getModel().getMesh( 0 ).position.x
+                            + ( bz.SettingGame.POLE_DIAMETER / 2 )
+                        );
 
-                    break;
+                        // set ring to new pole
+                        this.setNewPoleForRing( ring, pole );
+
+                        break;
+                    }
                 }
             }
 

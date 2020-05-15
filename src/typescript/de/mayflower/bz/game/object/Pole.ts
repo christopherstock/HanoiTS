@@ -15,7 +15,7 @@
         *   @param stage  The stage this wall belongs to.
         *   @param model  The model that represents this wall.
         ***************************************************************************************************************/
-        public constructor(stage:bz.Stage, model:bz.Model )
+        public constructor( stage:bz.Stage, model:bz.Model )
         {
             super( stage, model );
         }
