@@ -66,6 +66,26 @@
             return null;
         }
 
+        private getFreePickPosition( evt:PointerEvent ) : BABYLON.Vector3
+        {
+            // Use a predicate to get position on the ground
+            const pickinfo :BABYLON.PickingInfo = bz.Main.game.scene.getNativeScene().pick(
+                bz.Main.game.scene.getNativeScene().pointerX,
+                bz.Main.game.scene.getNativeScene().pointerY,
+
+                function ( mesh :BABYLON.AbstractMesh )
+                {
+                    return true;
+                }
+            );
+
+            if (pickinfo.hit) {
+                return pickinfo.pickedPoint;
+            }
+
+            return null;
+        }
+
         private onPointerDown( evt:PointerEvent ) : void
         {
             if ( evt.button !== 0 ) {
@@ -128,7 +148,7 @@
                 return;
             }
 
-            const current :BABYLON.Vector3 = this.getGroundPosition(evt);
+            const current :BABYLON.Vector3 = this.getFreePickPosition(evt);
 
             if ( !current ) {
                 return;
