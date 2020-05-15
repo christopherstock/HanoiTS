@@ -638,7 +638,7 @@
         /** ************************************************************************************************************
         *   Handles level specific keys.
         ***************************************************************************************************************/
-        private getPoleForRing( ringToCheck:bz.Ring ) : bz.Pole
+        public getPoleForRing( ringToCheck:bz.Ring ) : bz.Pole
         {
             for ( const pole of this.poles )
             {

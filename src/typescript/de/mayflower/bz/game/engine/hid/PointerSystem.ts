@@ -108,7 +108,20 @@
 
             if ( pickInfo.hit ) {
                 this.currentMesh = pickInfo.pickedMesh;
-                this.currentRing = this.getRingFromMesh( this.currentMesh );
+                const grabbedRing : bz.Ring = this.getRingFromMesh( this.currentMesh );
+                if (!grabbedRing) {
+                    return;
+                }
+
+                // check if we are even allowed to grab this ring
+                const pole : bz.Pole = bz.Main.game.stage.getPoleForRing(grabbedRing)
+
+                if (pole.rings[pole.rings.length-1] !== grabbedRing) {
+                    return;
+                }
+
+                this.currentRing = grabbedRing;
+
                 this.startingPoint = this.getFreePickPosition(evt);
 
                 bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
