@@ -23,6 +23,8 @@
         /** A collection of all walls in this stage. */
         private                             walls                   :bz.Wall[]                              = [];
 
+        private                             poles                   :bz.Pole[]                              = [];
+
         /** The game GUI. */
         private                             gui                     :bz.GUI                                 = null;
         /** The camera system that manages all scene cameras. */
@@ -82,6 +84,7 @@
             // create all game objects
             this.cameraSystem  = this.createCameraSystem();
             this.walls         = this.createWalls();
+            this.poles         = this.createPoles();
             this.rings         = this.createRings();
             this.skybox        = this.createSkybox();
             this.gui           = this.createGUI();
@@ -148,6 +151,11 @@
                 {
                     ring.render();
                 }
+
+                for ( const pole of this.poles )
+                {
+                    pole.render();
+                }
             }
 
             // render GUI
@@ -169,6 +177,11 @@
             for ( const ring of this.rings )
             {
                 ring.dispose();
+            }
+
+            for (const pole of this.poles )
+            {
+                pole.dispose();
             }
 
             // dispose all debug meshes
@@ -303,8 +316,19 @@
             );
             walls.push( this.ground );
 
+            return walls;
+        }
+
+        /**
+         * Creates the poles
+         *
+         * @return bz.Pole[]
+         */
+        private createPoles(): bz.Pole[]
+        {
+            const poles: bz.Pole[] = [];
             // pole A
-            walls.push(
+            poles.push(
                 new bz.Pole
                 (
                     this,
@@ -333,7 +357,7 @@
             );
 
             // pole B
-            walls.push(
+            poles.push(
                 new bz.Pole
                 (
                     this,
@@ -362,7 +386,7 @@
             );
 
             // pole C
-            walls.push(
+            poles.push(
                 new bz.Pole
                 (
                     this,
@@ -390,7 +414,7 @@
                 )
             );
 
-            return walls;
+            return poles;
         }
 
         /** ************************************************************************************************************
