@@ -42,9 +42,20 @@
 
                 function ( mesh :BABYLON.AbstractMesh )
                 {
+                    for ( const ring of bz.Main.game.stage.rings )
+                    {
+                        if ( mesh === ring.getModel().getMesh( 0 ) )
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+/*
                     return (
-                        mesh === bz.Main.game.stage.ground.getModel().getMesh( 0 )
+                        // true // mesh === bz.Main.game.stage.ground.getModel().getMesh( 0 )
                     );
+*/
                 }
             );
 
