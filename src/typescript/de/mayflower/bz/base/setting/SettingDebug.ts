@@ -10,7 +10,7 @@
         public  static  readonly    DEBUG_MODE                              :boolean            = true;
 
         /** Show FPS counter. */
-        public  static  readonly    SHOW_FPS                                :boolean            = ( true && SettingDebug.DEBUG_MODE );
+        public  static  readonly    SHOW_FPS                                :boolean            = ( false && SettingDebug.DEBUG_MODE );
 
         /** Enabled menu debug keys for switching camera and stages. */
         public  static  readonly    ENABLE_DEBUG_KEYS                       :boolean            = ( true  && SettingDebug.DEBUG_MODE );
