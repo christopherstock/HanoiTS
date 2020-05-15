@@ -109,7 +109,7 @@
             if ( pickInfo.hit ) {
                 this.currentMesh = pickInfo.pickedMesh;
                 this.currentRing = this.getRingFromMesh( this.currentMesh );
-                this.startingPoint = this.getGroundPosition(evt);
+                this.startingPoint = this.getFreePickPosition(evt);
 
                 bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
 
