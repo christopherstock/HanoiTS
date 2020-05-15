@@ -107,6 +107,12 @@
             );
 
             if ( pickInfo.hit ) {
+
+                // prevent motion by camera
+                bz.Main.game.stage.cameraSystem.getArcRotateCamera().detachControl(
+                    bz.Main.game.engine.getCanvasSystem().getNativeCanvas()
+                )
+
                 this.currentMesh = pickInfo.pickedMesh;
                 const grabbedRing : bz.Ring = this.getRingFromMesh( this.currentMesh );
                 if (!grabbedRing) {
@@ -125,28 +131,18 @@
                 this.startingPoint = this.getFreePickPosition(evt);
 
                 bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
-
-                if ( this.startingPoint ) { // we need to disconnect camera from canvas
-                    setTimeout(function () {
-                        bz.Main.game.stage.cameraSystem.getArcRotateCamera().detachControl(
-                            bz.Main.game.engine.getCanvasSystem().getNativeCanvas()
-                        )
-
-                    },
-                    0);
-                }
             }
         }
 
         private onPointerUp( evt:PointerEvent ) : void
         {
+            bz.Main.game.stage.cameraSystem.getArcRotateCamera().attachControl(
+                bz.Main.game.engine.getCanvasSystem().getNativeCanvas(),
+                true
+            );
+
             if ( this.startingPoint )
             {
-                bz.Main.game.stage.cameraSystem.getArcRotateCamera().attachControl(
-                    bz.Main.game.engine.getCanvasSystem().getNativeCanvas(),
-                    true
-                )
-
                 this.startingPoint = null;
 
                 bz.Main.game.stage.dropRingOnNewPosition( this.currentRing );
