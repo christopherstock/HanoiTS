@@ -254,26 +254,22 @@
         ***************************************************************************************************************/
         public dropRingOnNewPosition( currentRing:bz.Ring ) : void
         {
-            // TMP drop on center pole
-            currentRing.getModel().getMesh( 0 ).position.x = (
-                this.poles[ 1 ].getModel().getMesh( 0 ).position.x
-                + ( bz.SettingGame.POLE_DIAMETER / 2 )
-            );
-
-            // TMP drop on 1st pole
-            currentRing.getModel().getMesh( 0 ).position.x = (
-                this.poles[ 0 ].getModel().getMesh( 0 ).position.x
-                + ( bz.SettingGame.POLE_DIAMETER / 2 )
-            );
-
-            // TMP drop on 3rd pole
-            currentRing.getModel().getMesh( 0 ).position.x = (
-                this.poles[ 2 ].getModel().getMesh( 0 ).position.x
-                + ( bz.SettingGame.POLE_DIAMETER / 2 )
-            );
-
-
-
+            // check if the ring is over a pole
+            for ( const pole of this.poles )
+            {
+                if (
+                    currentRing.getModel().getMesh( 0 ).position.x + ( currentRing.diameter / 2 )
+                    > pole.getModel().getMesh( 0 ).position.x - bz.SettingGame.POLE_DIAMETER
+                    &&
+                    currentRing.getModel().getMesh( 0 ).position.x - ( currentRing.diameter / 2 )
+                    < pole.getModel().getMesh( 0 ).position.x + bz.SettingGame.POLE_DIAMETER
+                ) {
+                    currentRing.getModel().getMesh( 0 ).position.x = (
+                        pole.getModel().getMesh( 0 ).position.x
+                        + ( bz.SettingGame.POLE_DIAMETER / 2 )
+                    );
+                }
+            }
         }
 
         /** ************************************************************************************************************
@@ -467,9 +463,15 @@
                 let ringColor :BABYLON.Color3 = bz.SettingGame.RING_COLOR_LOWEST.clone();
                 ringColor = ringColor.add( new BABYLON.Color3( 0.1 * i, 0.1 * i, 0.1 * i ) );
 
+                const ringDiameter = bz.SettingGame.RING_SIZE_SMALLEST_RING
+                + (
+                    ( bz.SettingGame.RING_COUNT - 1 -  i ) * bz.SettingGame.RING_SIZE_DIFFERENCE
+                );
+
                 const newRing :bz.Ring = new bz.Ring
                 (
                     ( bz.SettingGame.RING_COUNT - i ),
+                    ringDiameter,
                     this,
                     new bz.Model
                     (
@@ -485,10 +487,7 @@
                                     ),
                                     0.0
                                 ),
-                                bz.SettingGame.RING_SIZE_SMALLEST_RING
-                                + (
-                                    ( bz.SettingGame.RING_COUNT - 1 -  i ) * bz.SettingGame.RING_SIZE_DIFFERENCE
-                                ),
+                                ringDiameter,
                                 bz.SettingGame.RING_THICKNESS,
                                 null,
                                 null, // bz.Texture.WALL_TEST,
