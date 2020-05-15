@@ -70,22 +70,14 @@
 
         private getFreePickPosition( evt:PointerEvent ) : BABYLON.Vector3
         {
-            // Use a predicate to get position on the ground
-            const pickinfo :BABYLON.PickingInfo = bz.Main.game.scene.getNativeScene().pick(
+            const ray = bz.Main.game.scene.getNativeScene().createPickingRay(
                 bz.Main.game.scene.getNativeScene().pointerX,
                 bz.Main.game.scene.getNativeScene().pointerY,
-
-                function ( mesh :BABYLON.AbstractMesh )
-                {
-                    return true;
-                }
+                null,
+                null
             );
 
-            if (pickinfo.hit) {
-                return pickinfo.pickedPoint;
-            }
-
-            return null;
+            return ray.origin.add(ray.direction.scale(10));
         }
 
         private onPointerDown( evt:PointerEvent ) : void
