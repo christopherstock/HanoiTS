@@ -20,6 +20,11 @@
         /** The texture 'wall elevator'. */
         public      static  readonly    WALL_ELEVATOR               :Texture                = new Texture( 'elevator.png',          bz.TextureHasAlpha.YES, bz.TextureUV.ALL_TO_ONE    );
 
+        /** The texture 'wood'. */
+        public      static  readonly    WALL_WOOD                   :Texture                = new Texture( 'wood.jpg',              bz.TextureHasAlpha.NO,  bz.TextureUV.TILED_BY_SIZE );
+        /** The texture 'glass'. */
+        public      static  readonly    WALL_GLASS                  :Texture                = new Texture( 'glass.jpg',             bz.TextureHasAlpha.NO,  bz.TextureUV.TILED_BY_SIZE );
+
         /** The texture 'house bank'. */
         public      static  readonly    HOUSE_BANK                  :Texture                = new Texture( 'house_bank.png',        bz.TextureHasAlpha.YES, bz.TextureUV.ALL_TO_ONE    );
         /** The texture 'house hospital'. */
@@ -70,6 +75,9 @@
             Texture.WALL_SOIL,
             Texture.WALL_GRASS,
             Texture.WALL_ELEVATOR,
+
+            Texture.WALL_WOOD,
+            Texture.WALL_GLASS,
 
             Texture.HOUSE_BANK,
             Texture.HOUSE_HOSPITAL,

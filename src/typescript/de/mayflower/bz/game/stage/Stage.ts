@@ -370,10 +370,10 @@
                         (
                             this.scene,
                             this.ambientColor,
-                            bz.Texture.WALL_TEST,
+                            bz.Texture.WALL_GLASS,
                             new BABYLON.Vector3(
                                 -( bz.SettingGame.LEVEL_SIZE_X / 2 ),
-                                -( bz.SettingGame.LEVEL_SIZE_Y     ),
+                                -( bz.SettingGame.LEVEL_SIZE_Y     ) - bz.MeshFactory.FACE_DEPTH,
                                 -( bz.SettingGame.LEVEL_SIZE_Z / 2 )
                             ),
                             new BABYLON.Vector3(
@@ -383,7 +383,7 @@
                             ),
                             null,
                             null,
-                            0.25
+                            0.4
                         ),
                     ]
                 )
@@ -421,7 +421,7 @@
                                 bz.SettingGame.POLE_DIAMETER,
                                 bz.SettingGame.POLE_SIZE_Y,
                                 null,
-                                bz.Texture.WALL_TEST,
+                                bz.Texture.WALL_WOOD,
                                 null,
                                 1.0,
                                 this.ambientColor
@@ -450,7 +450,7 @@
                                 bz.SettingGame.POLE_DIAMETER,
                                 bz.SettingGame.POLE_SIZE_Y,
                                 null,
-                                bz.Texture.WALL_TEST,
+                                bz.Texture.WALL_WOOD,
                                 null,
                                 1.0,
                                 this.ambientColor
@@ -479,7 +479,7 @@
                                 bz.SettingGame.POLE_DIAMETER,
                                 bz.SettingGame.POLE_SIZE_Y,
                                 null,
-                                bz.Texture.WALL_TEST,
+                                bz.Texture.WALL_WOOD,
                                 null,
                                 1.0,
                                 this.ambientColor
