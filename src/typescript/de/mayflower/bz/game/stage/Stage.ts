@@ -293,6 +293,23 @@
             }
         }
 
+        /**
+         * Checks whenever a ring is assignable to a pole
+         *
+         * @param ring
+         * @param pole
+         */
+        private ringIsAssignableToPole(ring: bz.Ring, pole: bz.Pole): boolean
+        {
+            if (pole.rings.length === 0) {
+                return true;
+            }
+
+            const lastRing : bz.Ring = pole.rings[pole.rings.length-1];
+
+            return lastRing.size > ring.size;
+        }
+
         /** ************************************************************************************************************
         *   Creates the camera system that manages all cameras that appear in this level.
         *
