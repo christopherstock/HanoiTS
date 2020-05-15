@@ -136,15 +136,7 @@
 
                 bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
 
-                if ( this.startingPoint ) { // we need to disconnect camera from canvas
-                    setTimeout(function () {
-                        bz.Main.game.stage.cameraSystem.getArcRotateCamera().detachControl(
-                            bz.Main.game.engine.getCanvasSystem().getNativeCanvas()
-                        )
-
-                    },
-                    0);
-                }
+                this.currentMesh.position.y = bz.SettingGame.POLE_SIZE_Y + 0.1;
             }
         }
 
@@ -183,7 +175,7 @@
             this.currentMesh.position.addInPlace( diff );
 
             // clip current Mesh to bounds! TODO extract to Stage
-            this.currentMesh.position.y = oldY;
+            this.currentMesh.position.y = bz.SettingGame.POLE_SIZE_Y + 0.1;
             this.currentMesh.position.z = 0;
 
             if ( this.currentMesh.position.x < -bz.SettingGame.LEVEL_SIZE_X / 4 )

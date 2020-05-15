@@ -270,14 +270,11 @@
                     {
                         ringIsOverPole = true;
 
-                        // set new position for ring
-                        ring.getModel().getMesh( 0 ).position.x = (
-                            pole.getModel().getMesh( 0 ).position.x
-                            + ( bz.SettingGame.POLE_DIAMETER / 2 )
-                        );
-
                         // set ring to new pole
                         this.setNewPoleForRing( ring, pole );
+
+                        // set new position for ring
+                        this.moveRingToPole(ring, pole);
 
                         // check if the game is solved
                         this.checkGameSolved();
@@ -291,11 +288,26 @@
             if ( !ringIsOverPole )
             {
                 const assignedPole :bz.Pole = this.getPoleForRing( ring );
-                ring.getModel().getMesh( 0 ).position.x = (
-                    assignedPole.getModel().getMesh( 0 ).position.x
-                    + ( bz.SettingGame.POLE_DIAMETER / 2 )
-                );
+                this.moveRingToPole(ring, assignedPole);
             }
+        }
+
+        /**
+         * Visually assign a ring to a pole
+         *
+         * @param ring
+         * @param pole
+         */
+        private moveRingToPole(ring: bz.Ring, pole: bz.Pole)
+        {
+            const ringMesh : BABYLON.AbstractMesh = ring.getModel().getMesh( 0 );
+
+            ringMesh.position.x = (
+                pole.getModel().getMesh( 0 ).position.x
+                + ( bz.SettingGame.POLE_DIAMETER / 2 )
+            );
+
+            ringMesh.position.y = this.getRingYPosition(pole.rings.length-1);
         }
 
         /**
@@ -524,9 +536,7 @@
                                 new BABYLON.Vector3(
                                     0.0,
                                     (
-                                        ( bz.SettingGame.RING_THICKNESS / 2 )
-                                        + bz.SettingGame.RING_DISTANCE_Y_GROUND
-                                        + ( ( bz.SettingGame.RING_THICKNESS + bz.SettingGame.RING_DISTANCE_Y ) * i )
+                                        this.getRingYPosition(i)
                                     ),
                                     0.0
                                 ),
@@ -546,6 +556,18 @@
             }
 
             return rings;
+        }
+
+        /**
+         * Returns the height (y coord) where the nth ring of a pyramid should be placed
+         *
+         * @param n
+         */
+        private getRingYPosition(n: number): number
+        {
+            return ( bz.SettingGame.RING_THICKNESS / 2 )
+                + bz.SettingGame.RING_DISTANCE_Y_GROUND
+                + ( ( bz.SettingGame.RING_THICKNESS + bz.SettingGame.RING_DISTANCE_Y ) * n );
         }
 
         /** ************************************************************************************************************
