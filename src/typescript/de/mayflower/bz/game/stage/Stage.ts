@@ -248,6 +248,23 @@
         }
 
         /** ************************************************************************************************************
+        *   Drops the ring on its new dragged position. The ring will snap to the pole it is over.
+        *
+        *   @return The camera system for this stage.
+        ***************************************************************************************************************/
+        public dropRingOnNewPosition( currentRing:bz.Ring ) : void
+        {
+            // TMP drop on center pole
+            currentRing.getModel().getMesh( 0 ).position.x = (
+                this.poles[ 1 ].getModel().getMesh( 0 ).position.x
+                + ( bz.SettingGame.POLE_DIAMETER / 2 )
+            );
+
+
+
+        }
+
+        /** ************************************************************************************************************
         *   Creates the camera system that manages all cameras that appear in this level.
         *
         *   @return The camera system for this stage.

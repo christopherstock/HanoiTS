@@ -143,6 +143,9 @@
                 )
 
                 this.startingPoint = null;
+
+                bz.Main.game.stage.dropRingOnNewPosition( this.currentRing );
+
                 return;
             }
         }
