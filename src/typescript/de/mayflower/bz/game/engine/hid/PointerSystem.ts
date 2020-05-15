@@ -10,6 +10,8 @@
         private         startingPoint       :BABYLON.Vector3        = null;
         /** The mesh currently being dragged. */
         private         currentMesh         :BABYLON.AbstractMesh   = null;
+        /** The ring currently being dragged. */
+        private         currentRing         :bz.Ring                = null;
 
         /** ************************************************************************************************************
         *   Adds pointer drag support for the level.
@@ -114,7 +116,10 @@
 
             if ( pickInfo.hit ) {
                 this.currentMesh = pickInfo.pickedMesh;
+                this.currentRing = this.getRingFromMesh( this.currentMesh );
                 this.startingPoint = this.getGroundPosition(evt);
+
+                bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
 
                 if ( this.startingPoint ) { // we need to disconnect camera from canvas
                     setTimeout(function () {
@@ -177,5 +182,18 @@
             }
 
             this.startingPoint = current;
+        }
+
+        private getRingFromMesh( mesh:BABYLON.AbstractMesh ) : bz.Ring
+        {
+            for ( const ring of bz.Main.game.stage.rings )
+            {
+                if ( mesh === ring.getModel().getMesh( 0 ) )
+                {
+                    return ring;
+                }
+            }
+
+            return null;
         }
     }
