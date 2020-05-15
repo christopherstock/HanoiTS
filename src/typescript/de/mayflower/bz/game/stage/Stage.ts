@@ -263,10 +263,17 @@
                     < pole.getModel().getMesh( 0 ).position.x + bz.SettingGame.POLE_DIAMETER
                 ) {
                     ringIsOverPole = true;
+
+                    // set new position for ring
                     ring.getModel().getMesh( 0 ).position.x = (
                         pole.getModel().getMesh( 0 ).position.x
                         + ( bz.SettingGame.POLE_DIAMETER / 2 )
                     );
+
+                    // set ring to new pole
+                    this.setNewPoleForRing( ring, pole );
+
+                    break;
                 }
             }
 
@@ -623,5 +630,30 @@
             }
 
             return null;
+        }
+
+        /** ************************************************************************************************************
+        *   Assigns a new pole for the specified ring.
+        ***************************************************************************************************************/
+        private setNewPoleForRing( aRing:bz.Ring, aPole:bz.Pole ) : void
+        {
+            for ( const pole of this.poles )
+            {
+                pole.rings = pole.rings.filter(
+                    ( obj :bz.Ring ) => { return ( obj !== aRing ); }
+                );
+            }
+
+            aPole.rings.push( aRing );
+
+            // debug out all poles
+            bz.Debug.game.log( 'Set new pole for ring [' + String( aRing.size ) + ']' );
+            for ( let i:number = 0; i < this.poles.length; ++i )
+            {
+                for ( const ring of this.poles[ i ].rings )
+                {
+                    bz.Debug.game.log( ' Pole [' + String( i ) + '] Ring [' + String( ring.size ) + ']' );
+                }
+            }
         }
     }
