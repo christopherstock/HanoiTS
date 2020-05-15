@@ -155,10 +155,12 @@
             }
 
             const diff :BABYLON.Vector3 = current.subtract( this.startingPoint );
+
+            const oldY :number = this.currentMesh.position.y;
             this.currentMesh.position.addInPlace( diff );
 
             // clip current Mesh to bounds! TODO extract to Stage
-            this.currentMesh.position.y = ( bz.SettingGame.RING_THICKNESS / 2 );
+            this.currentMesh.position.y = oldY;
             this.currentMesh.position.z = 0;
 
             if ( this.currentMesh.position.x < -bz.SettingGame.LEVEL_SIZE_X / 4 )

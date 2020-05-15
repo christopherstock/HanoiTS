@@ -440,7 +440,7 @@
 
                 const newRing :bz.Ring = new bz.Ring
                 (
-                    i,
+                    ( bz.SettingGame.RING_COUNT - i ),
                     this,
                     new bz.Model
                     (
