@@ -301,16 +301,36 @@
          * @param ring
          * @param pole
          */
-        private moveRingToPole(ring: bz.Ring, pole: bz.Pole)
+        private moveRingToPole(ring: bz.Ring, pole: bz.Pole): void
         {
             const ringMesh : BABYLON.AbstractMesh = ring.getModel().getMesh( 0 );
 
-            ringMesh.position.x = (
+            const targetX = (
                 pole.getModel().getMesh( 0 ).position.x
                 + ( bz.SettingGame.POLE_DIAMETER / 2 )
             );
 
-            ringMesh.position.y = this.getRingYPosition(pole.rings.length-1);
+            BABYLON.Animation.CreateAndStartAnimation(
+                'ringSlideSnap',
+                ringMesh,
+                'position.x',
+                30,
+                5,
+                ringMesh.position.x,
+                targetX,
+                BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+            );
+
+            BABYLON.Animation.CreateAndStartAnimation(
+                'ringFallDown',
+                ringMesh,
+                'position.y',
+                30,
+                5,
+                ringMesh.position.y,
+                this.getRingYPosition(pole.rings.length-1),
+                BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+            );
         }
 
         /**

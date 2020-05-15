@@ -137,7 +137,18 @@
 
                 bz.Debug.game.log( 'Grabbed Ring with size [' + String( this.currentRing.size ) + ']' );
 
-                this.currentMesh.position.y = this.getRingOffset();
+                // BABYLON.Animation.CreateAndStartAnimation('boxscale', box1, 'scaling.x', 30, 120, 1.0, 1.5);
+                BABYLON.Animation.CreateAndStartAnimation(
+                    'ringFloatUp',
+                    this.currentMesh,
+                    'position.y',
+                    30,
+                    5,
+                    this.currentMesh.position.y,
+                    this.getRingOffset(),
+                    BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT
+                );
+
             }
         }
 
