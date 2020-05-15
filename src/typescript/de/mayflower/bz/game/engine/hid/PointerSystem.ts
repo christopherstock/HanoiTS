@@ -57,11 +57,11 @@
 
         private onPointerDown( evt:PointerEvent ) : void
         {
-            if (evt.button !== 0) {
+            if ( evt.button !== 0 ) {
                 return;
             }
 
-            // check if we are under a mesh
+            // check if we are under a ring
             const pickInfo :BABYLON.PickingInfo = bz.Main.game.scene.getNativeScene().pick(
                 bz.Main.game.scene.getNativeScene().pointerX,
                 bz.Main.game.scene.getNativeScene().pointerY,
@@ -69,11 +69,18 @@
 
                     // return true; // mesh !== ground;
 
-                    return (
-                        mesh === bz.Main.game.stage.rings[ 0 ].getModel().getMesh( 0 )
-                    );
+                    for ( const ring of bz.Main.game.stage.rings )
+                    {
+                        if ( mesh === ring.getModel().getMesh( 0 ) )
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
                 }
             );
+
             if ( pickInfo.hit ) {
                 this.currentMesh = pickInfo.pickedMesh;
                 this.startingPoint = this.getGroundPosition(evt);
