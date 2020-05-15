@@ -260,6 +260,18 @@
                 + ( bz.SettingGame.POLE_DIAMETER / 2 )
             );
 
+            // TMP drop on 1st pole
+            currentRing.getModel().getMesh( 0 ).position.x = (
+                this.poles[ 0 ].getModel().getMesh( 0 ).position.x
+                + ( bz.SettingGame.POLE_DIAMETER / 2 )
+            );
+
+            // TMP drop on 3rd pole
+            currentRing.getModel().getMesh( 0 ).position.x = (
+                this.poles[ 2 ].getModel().getMesh( 0 ).position.x
+                + ( bz.SettingGame.POLE_DIAMETER / 2 )
+            );
+
 
 
         }
