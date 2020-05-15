@@ -404,6 +404,9 @@
 
             for ( let i:number = 0; i < bz.SettingGame.RING_COUNT; ++i )
             {
+                let ringColor :BABYLON.Color3 = bz.SettingGame.RING_COLOR_LOWEST.clone();
+                ringColor = ringColor.add( new BABYLON.Color3( 0.1 * i, 0.1 * i, 0.1 * i ) );
+
                 const newRing :bz.Ring = new bz.Ring
                 (
                     i,
@@ -411,29 +414,30 @@
                     new bz.Model
                     (
                         [
-                            BABYLON.Mesh.CreateTorus(
-                                ( 'ring' + String( i ) ),
-                                (
-                                    bz.SettingGame.RING_SIZE_SMALLEST_RING
-                                    + (
-                                        ( bz.SettingGame.RING_COUNT - 1 -  i ) * bz.SettingGame.RING_SIZE_DIFFERENCE
-                                    )
+                            bz.MeshFactory.createTorus(
+                                this.scene,
+                                new BABYLON.Vector3(
+                                    0.0,
+                                    (
+                                        ( bz.SettingGame.RING_THICKNESS / 2 )
+                                        + bz.SettingGame.RING_DISTANCE_Y_GROUND
+                                        + ( ( bz.SettingGame.RING_THICKNESS + bz.SettingGame.RING_DISTANCE_Y ) * i )
+                                    ),
+                                    0.0
+                                ),
+                                bz.SettingGame.RING_SIZE_SMALLEST_RING
+                                + (
+                                    ( bz.SettingGame.RING_COUNT - 1 -  i ) * bz.SettingGame.RING_SIZE_DIFFERENCE
                                 ),
                                 bz.SettingGame.RING_THICKNESS,
-                                50,
-                                this.scene.getNativeScene()
+                                null,
+                                null, // bz.Texture.WALL_TEST,
+                                null, // new BABYLON.Color3( 0.5, 0.5, 0.5 ),
+                                1.0,
+                                ringColor // this.ambientColor
                             ),
                         ]
                     )
-                );
-                newRing.getModel().getMesh( 0 ).position = new BABYLON.Vector3(
-                    0.0,
-                    (
-                        ( bz.SettingGame.RING_THICKNESS / 2 )
-                        + bz.SettingGame.RING_DISTANCE_Y
-                        + ( ( bz.SettingGame.RING_THICKNESS + bz.SettingGame.RING_DISTANCE_Y ) * i )
-                    ),
-                    0.0
                 );
 
                 rings.push( newRing );

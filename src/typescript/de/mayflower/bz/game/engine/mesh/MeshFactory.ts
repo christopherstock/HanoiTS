@@ -719,8 +719,8 @@
         *
         *   @param scene           The scene where this mesh will be applied.
         *   @param position        Where to place this mesh.
-        *   @param diameter        The diameter of the cylinder.
-        *   @param height          The height of the cylinder.
+        *   @param diameter        The diameter of the torus.
+        *   @param thickness       The thickness of the torus.
         *   @param rotation        The initial rotation for all axis.
         *   @param texture         The texture to apply.
         *   @param color           The solid color to apply.
@@ -734,7 +734,7 @@
             scene         :bz.Scene,
             position      :BABYLON.Vector3,
             diameter      :number,
-            height        :number,
+            thickness     :number,
             rotation      :BABYLON.Vector3,
             texture       :bz.Texture,
             color         :BABYLON.Color3,
@@ -743,6 +743,7 @@
         )
         : BABYLON.Mesh
         {
+/*
             let faceUV:BABYLON.Vector4[] = [];
 
             if ( texture !== null )
@@ -772,35 +773,39 @@
                     }
                 }
             }
-
-            const cylinder:BABYLON.Mesh = BABYLON.MeshBuilder.CreateCylinder
+*/
+            const torus:BABYLON.Mesh = BABYLON.MeshBuilder.CreateTorus
             (
-                MeshFactory.createNextMeshId(),
-                {
-                    diameter: diameter,
-                    height:   height,
-
-                    faceUV:   faceUV,
-                },
+                ( MeshFactory.createNextMeshId() ),
+                (
+                    {
+                        diameter: diameter,
+                        thickness: thickness,
+                        tessellation: 50,
+                        // frontUVs: faceUV,
+                    }
+                ),
                 scene.getNativeScene()
             );
 
+            torus.position = position;
+/*
             bz.MeshManipulation.setPositionAndPivot
             (
-                cylinder,
+                torus,
                 position,
                 diameter,
-                height,
+                thickness,
                 diameter
             );
-
+*/
             const material:BABYLON.StandardMaterial = scene.getMaterialSystem().createMaterial
             (
                 scene.getNativeScene(),
                 texture,
                 true,
                 diameter,
-                height,
+                thickness,
                 color,
                 materialAlpha,
                 emissiveColor
@@ -809,7 +814,7 @@
             return MeshFactory.decorateMesh
             (
                 scene.getNativeScene(),
-                cylinder,
+                torus,
                 rotation,
                 material
             );
