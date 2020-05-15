@@ -44,6 +44,8 @@
         /** The pointer system. */
         private                             pointerSystem           :bz.PointerSystem                       = null;
 
+        private                             gameSolved              :boolean                                = false;
+
         /** ************************************************************************************************************
         *   Creates a new custom stage.
         *
@@ -276,6 +278,9 @@
 
                         // set ring to new pole
                         this.setNewPoleForRing( ring, pole );
+
+                        // check if the game is solved
+                        this.checkGameSolved();
 
                         break;
                     }
@@ -676,6 +681,18 @@
                 {
                     bz.Debug.game.log( ' Pole [' + String( i ) + '] Ring [' + String( ring.size ) + ']' );
                 }
+            }
+        }
+
+        private checkGameSolved() : void
+        {
+            if (
+                this.poles[ 0 ].rings.length === bz.SettingGame.RING_COUNT
+                || this.poles[ 2 ].rings.length === bz.SettingGame.RING_COUNT
+            ) {
+                alert( 'The game has been solved!' );
+
+                this.gameSolved = true;
             }
         }
     }
