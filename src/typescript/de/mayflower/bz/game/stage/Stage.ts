@@ -402,30 +402,42 @@
         {
             const rings :bz.Ring[] = [];
 
-            // 1st example ring
-            const newRing :bz.Ring = new bz.Ring
-            (
-                1,
-                this,
-                new bz.Model
+            for ( let i:number = 0; i < bz.SettingGame.RING_COUNT; ++i )
+            {
+                const newRing :bz.Ring = new bz.Ring
                 (
-                    [
-                        BABYLON.Mesh.CreateTorus(
-                            'red',
-                            2.5,
-                            bz.SettingGame.RING_THICKNESS,
-                            50,
-                            this.scene.getNativeScene()
-                        ),
-                    ]
-                )
-            );
-            newRing.getModel().getMesh( 0 ).position = new BABYLON.Vector3(
-                0.0,
-                ( bz.SettingGame.RING_THICKNESS / 2 ),
-                0.0
-            );
-            rings.push( newRing );
+                    i,
+                    this,
+                    new bz.Model
+                    (
+                        [
+                            BABYLON.Mesh.CreateTorus(
+                                ( 'ring' + String( i ) ),
+                                (
+                                    bz.SettingGame.RING_SIZE_SMALLEST_RING
+                                    + (
+                                        ( bz.SettingGame.RING_COUNT - 1 -  i ) * bz.SettingGame.RING_SIZE_DIFFERENCE
+                                    )
+                                ),
+                                bz.SettingGame.RING_THICKNESS,
+                                50,
+                                this.scene.getNativeScene()
+                            ),
+                        ]
+                    )
+                );
+                newRing.getModel().getMesh( 0 ).position = new BABYLON.Vector3(
+                    0.0,
+                    (
+                        ( bz.SettingGame.RING_THICKNESS / 2 )
+                        + bz.SettingGame.RING_DISTANCE_Y
+                        + ( ( bz.SettingGame.RING_THICKNESS + bz.SettingGame.RING_DISTANCE_Y ) * i )
+                    ),
+                    0.0
+                );
+
+                rings.push( newRing );
+            }
 
             return rings;
         }

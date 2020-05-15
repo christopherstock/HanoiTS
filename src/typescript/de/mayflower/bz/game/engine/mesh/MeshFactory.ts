@@ -669,7 +669,7 @@
         *   @param sizeY        Number of blocks Y to create.
         *   @param sizeZ        Number of blocks Z to create.
         ***************************************************************************************************************/
-        public static createBoxLine
+        public static createBoxPile
         (
             scene        :bz.Scene,
             ambientColor :BABYLON.Color3,
@@ -712,6 +712,107 @@
             }
 
             return new bz.Model( walls );
+        }
+
+        /** ************************************************************************************************************
+        *   Creates a torus.
+        *
+        *   @param scene           The scene where this mesh will be applied.
+        *   @param position        Where to place this mesh.
+        *   @param diameter        The diameter of the cylinder.
+        *   @param height          The height of the cylinder.
+        *   @param rotation        The initial rotation for all axis.
+        *   @param texture         The texture to apply.
+        *   @param color           The solid color to apply.
+        *   @param materialAlpha   The opacity for this mesh.
+        *   @param emissiveColor   The emissive color for this material.
+        *
+        *   @return The created mesh.
+        ***************************************************************************************************************/
+        public static createTorus
+        (
+            scene         :bz.Scene,
+            position      :BABYLON.Vector3,
+            diameter      :number,
+            height        :number,
+            rotation      :BABYLON.Vector3,
+            texture       :bz.Texture,
+            color         :BABYLON.Color3,
+            materialAlpha :number,
+            emissiveColor :BABYLON.Color3
+        )
+        : BABYLON.Mesh
+        {
+            let faceUV:BABYLON.Vector4[] = [];
+
+            if ( texture !== null )
+            {
+                switch ( texture.getStrategyUV() )
+                {
+                    case bz.TextureUV.ALL_TO_ONE:
+                    {
+                        faceUV =
+                        [
+                            new BABYLON.Vector4( 0.0, 0.0, 1.0, 1.0 ),
+                            new BABYLON.Vector4( 0.0, 0.0, 1.0, 1.0  ),
+                            new BABYLON.Vector4( 0.0, 0.0, 1.0, 1.0 ),
+                        ];
+                        break;
+                    }
+
+                    case bz.TextureUV.TILED_BY_SIZE:
+                    {
+                        faceUV =
+                        [
+                            new BABYLON.Vector4( 0.0, 0.0, -diameter,               diameter ),
+                            new BABYLON.Vector4( 0.0, 0.0, -( diameter * Math.PI ), height   ),
+                            new BABYLON.Vector4( 0.0, 0.0, diameter,                diameter ),
+                        ];
+                        break;
+                    }
+                }
+            }
+
+            const cylinder:BABYLON.Mesh = BABYLON.MeshBuilder.CreateCylinder
+            (
+                MeshFactory.createNextMeshId(),
+                {
+                    diameter: diameter,
+                    height:   height,
+
+                    faceUV:   faceUV,
+                },
+                scene.getNativeScene()
+            );
+
+            bz.MeshManipulation.setPositionAndPivot
+            (
+                cylinder,
+                position,
+                diameter,
+                height,
+                diameter
+            );
+
+            const material:BABYLON.StandardMaterial = scene.getMaterialSystem().createMaterial
+            (
+                scene.getNativeScene(),
+                texture,
+                true,
+                diameter,
+                height,
+                color,
+                materialAlpha,
+                emissiveColor
+            );
+
+            return MeshFactory.decorateMesh
+            (
+                scene.getNativeScene(),
+                cylinder,
+                rotation,
+                material
+            );
         }
 
         /** ************************************************************************************************************
