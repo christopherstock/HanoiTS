@@ -23,8 +23,6 @@
         /** A collection of all walls in this stage. */
         private                             walls                   :bz.Wall[]                              = [];
 
-        private                             poles                   :bz.Pole[]                              = [];
-
         /** The game GUI. */
         private                             gui                     :bz.GUI                                 = null;
         /** The camera system that manages all scene cameras. */
@@ -36,6 +34,8 @@
         /** Indicates pause state. */
         private                             pause                   :boolean                                = false;
 
+        /** All three poles. */
+        private                             poles                   :bz.Pole[]                              = [];
         /** All rings. */
         public                              rings                   :bz.Ring[]                              = null;
         /** The level ground plane. */
@@ -88,6 +88,12 @@
             this.rings         = this.createRings();
             this.skybox        = this.createSkybox();
             this.gui           = this.createGUI();
+
+            // add all rings to the 2nd pole
+            for ( const ring of this.rings )
+            {
+                this.poles[ 1 ].rings.push( ring );
+            }
 
             // set camera system
             this.setActiveCamera( this.initialCamera );
@@ -327,6 +333,7 @@
         private createPoles(): bz.Pole[]
         {
             const poles: bz.Pole[] = [];
+
             // pole A
             poles.push(
                 new bz.Pole
