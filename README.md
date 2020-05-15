@@ -2,7 +2,7 @@
 
 The Towers of Hanoi - Realised with TypeScript and the [babylon.js](https://www.babylonjs.com/) 3D engine.
 
-![HanoiTS](https://github.com/christopherstock/HanoiTS/raw/master/dist/res/image/promo/promo.png)
+![HanoiTS](https://github.com/christopherstock/HanoiTS/raw/master/dist/res/image/promo/promo.jpg)
 
 ## Tech Stack
 - babylon.js 4.0.3
