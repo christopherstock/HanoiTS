@@ -63,7 +63,7 @@
         "babylonjs-gui": "4.0.3",
         "cannon": "0.6.2",
         "earcut": "2.1.5",
-        "moment": "2.24.0",
+        "moment": "2.29.4",
         "rc-scroll-anim": "2.7.4",
         "rc-tween-one": "2.6.8",
         "react": "16.12.0",
